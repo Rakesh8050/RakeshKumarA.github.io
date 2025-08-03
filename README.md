@@ -7,7 +7,7 @@ This space serves as a portfolio of my technical projects and code contributions
 
 For a comprehensive overview of my work, including detailed project descriptions, a complete list of my technical skills, and my professional experience, please visit my personal portfolio website.
 
-Portfolio Website: [Link to be updated upon completion]
+Portfolio Website: [Live website][(https://rakesh8050.github.io/RakeshKumarA.github.io/)]
 
 📫 Let's Connect
 
