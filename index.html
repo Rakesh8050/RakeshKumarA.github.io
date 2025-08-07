@@ -361,8 +361,10 @@
             skillText.textContent = skill;
             skillElement.appendChild(skillText);
 
+            // The clickable element now has the class and the data attribute
             const explainerBtn = document.createElement('span');
-            explainerBtn.innerHTML = '<i class="fas fa-info-circle ml-3 skill-explainer-btn"></i>';
+            explainerBtn.className = 'skill-explainer-btn';
+            explainerBtn.innerHTML = '<i class="fas fa-info-circle ml-3"></i>';
             explainerBtn.title = `✨ Explain with AI`;
             explainerBtn.dataset.skill = skill;
             skillElement.appendChild(explainerBtn);
@@ -449,7 +451,7 @@
             for (let x = 0; x < columns; x++) drops[x] = 1;
         });
 
-        // --- Gemini API and Modal Logic ---
+        // --- Gemini API and Modal Logic (FIXED) ---
         const modal = document.getElementById('skill-modal');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const modalTitle = document.getElementById('modal-skill-title');
@@ -457,9 +459,11 @@
         const loaderHTML = '<div class="flex justify-center items-center h-24"><div class="loader"></div></div>';
 
         skillsContainer.addEventListener('click', async (e) => {
+            // Correctly identify the clickable target (the span)
             const target = e.target.closest('.skill-explainer-btn');
             if (target) {
-                const skill = target.parentElement.dataset.skill;
+                // Get the skill from the target's dataset
+                const skill = target.dataset.skill;
                 openModal(skill);
                 await getSkillExplanation(skill);
             }
