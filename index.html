@@ -89,6 +89,40 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Skill explainer button */
+        .skill-explainer-btn {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .skill-explainer-btn:hover {
+            color: #64ffda;
+        }
+        /* Modal styles */
+        .modal-overlay {
+            background-color: rgba(10, 25, 47, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+             background-color: #112240;
+             border: 1px solid #1e2d4a;
+        }
+        /* Spinner for loading state */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #64ffda;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .clickable-card {
+            display: block;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -101,7 +135,8 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-white">Rakesh Kumar A.</a>
             <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="nav-link active">Home</a>
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
                 <a href="projects.html" class="nav-link">Projects</a>
                 <a href="internships.html" class="nav-link">Internships</a>
                 <a href="certificates.html" class="nav-link">Certificates</a>
@@ -114,7 +149,8 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="index.html" class="block py-2 nav-link text-center">Home</a>
+            <a href="#home" class="block py-2 nav-link text-center">Home</a>
+            <a href="#about" class="block py-2 nav-link text-center">About</a>
             <a href="projects.html" class="block py-2 nav-link text-center">Projects</a>
             <a href="internships.html" class="block py-2 nav-link text-center">Internships</a>
             <a href="certificates.html" class="block py-2 nav-link text-center">Certificates</a>
@@ -129,7 +165,6 @@
             <div class="section-card p-8 md:p-12 rounded-lg max-w-5xl">
                 <div class="flex flex-col md:flex-row items-center justify-center w-full gap-8 md:gap-12">
                     <div class="flex-shrink-0 w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-[#64ffda] shadow-lg">
-                        <!-- Image path updated to use relative path for GitHub hosting. -->
                         <img src="assets/images/profile.jpeg" alt="Rakesh Kumar A" class="w-full h-full object-cover">
                     </div>
                     <div class="text-center md:text-left max-w-2xl">
@@ -147,7 +182,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20">
+        <section id="about" class="py-16">
             <h2 class="text-3xl font-bold text-center text-white mb-12">About Me</h2>
             <div class="section-card max-w-4xl mx-auto p-8 rounded-lg">
                 <p class="text-lg mb-4 text-[#ccd6f6]">
@@ -164,9 +199,120 @@
             </div>
         </section>
 
+        <!-- Skills Section -->
+        <section id="skills" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Core Skills</h2>
+            <div class="section-card max-w-4xl mx-auto p-8 rounded-lg">
+                <div id="skills-container" class="flex flex-wrap justify-center items-center gap-4 text-[#ccd6f6]">
+                    <!-- Skills will be dynamically populated here -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Projects Section -->
+        <section id="projects" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Featured Projects</h2>
+            <div class="section-card max-w-4xl mx-auto p-8 rounded-lg">
+                <div class="space-y-6">
+                    <a href="projects.html" class="block p-4 rounded-lg hover:bg-cyan-900/30 transition-colors duration-300">
+                        <h3 class="text-xl font-semibold text-cyan-300">AI/ML Analysis of TCGA - LUSC | Lung Cancer Gene Expression Dataset</h3>
+                        <p class="text-[#8892b0] mt-1">Utilized machine learning models to analyze gene expression data for lung cancer research.</p>
+                    </a>
+                    <a href="projects.html" class="block p-4 rounded-lg hover:bg-cyan-900/30 transition-colors duration-300">
+                        <h3 class="text-xl font-semibold text-cyan-300">In Silico Design of a Multi-Epitope Vaccine for Group A Streptococcus (GAS)</h3>
+                        <p class="text-[#8892b0] mt-1">Designed a novel vaccine candidate using computational immunology and vaccine design principles.</p>
+                    </a>
+                    <a href="projects.html" class="block p-4 rounded-lg hover:bg-cyan-900/30 transition-colors duration-300">
+                        <h3 class="text-xl font-semibold text-cyan-300">Next-Generation-Sequencing-Based-Pipeline-for-Rapid-Pathogen-Detection</h3>
+                        <p class="text-[#8892b0] mt-1">Developed an automated pipeline for fast and accurate identification of pathogens from NGS data.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internships Section -->
+        <section id="internships" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Internships</h2>
+            <div class="section-card max-w-4xl mx-auto p-8 rounded-lg">
+                <div class="relative border-l-2 border-cyan-700/50 ml-4">
+                    <a href="internships.html" class="block mb-10 ml-8 p-4 rounded-lg hover:bg-cyan-900/30 transition-colors duration-300">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-cyan-900 rounded-full -left-4 ring-4 ring-[#112240]">
+                            <i class="fas fa-briefcase text-cyan-300"></i>
+                        </span>
+                        <h3 class="flex items-center mb-1 text-xl font-semibold text-white">Bioinformatics Intern</h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-[#8892b0]">Shodhaka Life Sciences Pvt. Ltd., Bangalore | Dec 2024 - Jun 2025</time>
+                        <ul class="list-disc list-inside mt-2 text-[#ccd6f6] space-y-1">
+                            <li>Evaluated Transcription Factor Binding Site (TFBS) resources to advance gene regulation research.</li>
+                            <li>Performed motif enrichment analysis using MEME Suite and RSAT.</li>
+                            <li>Developed proficiency in Python and R for data analysis and scripting.</li>
+                        </ul>
+                    </a>
+                    <a href="internships.html" class="block ml-8 p-4 rounded-lg hover:bg-cyan-900/30 transition-colors duration-300">
+                        <span class="absolute flex items-center justify-center w-8 h-8 bg-cyan-900 rounded-full -left-4 ring-4 ring-[#112240]">
+                            <i class="fas fa-briefcase text-cyan-300"></i>
+                        </span>
+                        <h3 class="flex items-center mb-1 text-xl font-semibold text-white">Bioinformatics Intern</h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-[#8892b0]">Biokart India Pvt.Ltd, India | Sep 2024 - Nov 2024</time>
+                        <ul class="list-disc list-inside mt-2 text-[#ccd6f6] space-y-1">
+                            <li>Gained hands-on experience in NGS workflows, including quality control (FastQC) and trimming (TrimGalore).</li>
+                            <li>Processed Whole-Genome (WGS) and Whole-Metagenome (WMS) sequencing data.</li>
+                            <li>Contributed to the generation of genomic and metagenomic reports.</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Education</h2>
+            <div class="section-card max-w-4xl mx-auto p-8 rounded-lg divide-y divide-cyan-700/30">
+                <div class="py-4">
+                    <h3 class="text-xl font-semibold text-white">MSc in Bioinformatics</h3>
+                    <p class="text-[#8892b0]">Nrupathunga University, Bangalore | 2023 - 2025</p>
+                    <p class="text-cyan-300 mt-1">Aggregate: 79.5%</p>
+                </div>
+                <div class="py-4">
+                    <h3 class="text-xl font-semibold text-white">BSc in Zoology, Biochemistry, Genetics</h3>
+                    <p class="text-[#8892b0]">Nrupathunga University, Bangalore | 2020 - 2023</p>
+                    <p class="text-cyan-300 mt-1">CGPA: 6.94</p>
+                </div>
+                 <div class="pt-4">
+                    <h3 class="text-xl font-semibold text-white">Higher Secondary & Secondary Education</h3>
+                    <p class="text-[#8892b0]">St Joseph's PU College (61.33%) & Vidya Mandir Public School, Bangalore</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Courses Section -->
+        <section id="courses" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Courses & Certifications</h2>
+            <a href="certificates.html" class="section-card max-w-4xl mx-auto p-8 rounded-lg block clickable-card">
+                 <ul class="list-none space-y-4 text-[#ccd6f6]">
+                    <li class="flex items-center">
+                        <i class="fas fa-certificate text-cyan-300 mr-4"></i>
+                        <span>2-days Hands-on Workshop on "Bioinformatics Data Analysis"</span>
+                    </li>
+                     <li class="flex items-center">
+                        <i class="fas fa-certificate text-cyan-300 mr-4"></i>
+                        <span>Introduction to Small Molecule Drug Discovery & Development</span>
+                    </li>
+                     <li class="flex items-center">
+                        <i class="fas fa-certificate text-cyan-300 mr-4"></i>
+                        <span>Hands-on Introduction to Linux Commands and Shell Scripting</span>
+                    </li>
+                     <li class="flex items-center">
+                        <i class="fas fa-certificate text-cyan-300 mr-4"></i>
+                        <span>Finding Hidden Message in DNA (Bioinformatics Method 1)</span>
+                    </li>
+                </ul>
+            </a>
+        </section>
+
+
         <!-- Contact Section -->
-        <section id="contact" class="py-20 text-center">
-            <h2 class="text-3xl font-bold text-white mb-4">Get In Touch</h2>
+        <section id="contact" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-4">Get In Touch</h2>
             <p class="text-lg max-w-2xl mx-auto text-[#8892b0] mb-8">
                 I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
             </p>
@@ -184,97 +330,210 @@
         <p>&copy; 2025 Rakesh Kumar A. All rights reserved.</p>
         <p class="mt-1">Designed & Built by Rakesh Kumar A</p>
     </footer>
+
+    <!-- AI Skill Explainer Modal -->
+    <div id="skill-modal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
+        <div class="modal-content w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg p-6 relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-2xl text-[#8892b0] hover:text-white">&times;</button>
+            <h3 id="modal-skill-title" class="text-2xl font-bold text-white mb-4"></h3>
+            <div id="modal-skill-explanation" class="text-[#ccd6f6]">
+                <div class="flex justify-center items-center h-24">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script>
-        // Mobile Menu Toggle
+        // --- Static Data and Initial Setup ---
+        const skills = [
+            'NGS Data Analysis', 'Python', 'R Programming', 'Machine Learning', 'Linux',
+            'Bash Scripting', 'Git', 'CADD', 'In Silico Vaccine Design', 'Biostatistics',
+            'Differential Gene Expression'
+        ];
+
+        const skillsContainer = document.getElementById('skills-container');
+        skills.forEach(skill => {
+            const skillElement = document.createElement('div');
+            skillElement.className = 'flex items-center bg-cyan-900/50 border border-cyan-700 text-cyan-300 text-sm font-medium px-4 py-2 rounded-full';
+            
+            const skillText = document.createElement('span');
+            skillText.textContent = skill;
+            skillElement.appendChild(skillText);
+
+            const explainerBtn = document.createElement('span');
+            explainerBtn.innerHTML = '<i class="fas fa-info-circle ml-3 skill-explainer-btn"></i>';
+            explainerBtn.title = `✨ Explain with AI`;
+            explainerBtn.dataset.skill = skill;
+            skillElement.appendChild(explainerBtn);
+
+            skillsContainer.appendChild(skillElement);
+        });
+
+        // --- Mobile Menu Logic ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when a link is clicked
-        const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+        const mobileNavLinks = document.querySelectorAll('#mobile-menu a, .nav-link');
         mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth < 768 && e.currentTarget.getAttribute('href').startsWith('#')) {
+                   mobileMenu.classList.add('hidden');
+                }
+                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+                if(e.currentTarget.classList.contains('nav-link') && e.currentTarget.getAttribute('href').startsWith('#')) {
+                    e.currentTarget.classList.add('active');
+                }
             });
         });
 
-        // Fade-in sections on scroll
+        // --- Fade-in and Active Nav on Scroll ---
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('nav .hidden a');
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('fade-in-visible');
+                    
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        if (link.getAttribute('href').startsWith('#')) {
+                            link.classList.remove('active');
+                            if(link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        }
+                    });
                 }
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('section').forEach(section => {
+        sections.forEach(section => {
             section.classList.add('fade-in-section');
             observer.observe(section);
         });
 
-        // --- Genomic Data Stream Background ---
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        // Set canvas to full screen
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Characters to use
+        // --- Background Animation ---
+        const bgCanvas = document.getElementById('bg-canvas');
+        const ctx = bgCanvas.getContext('2d');
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
         const chars = ['A', 'T', 'C', 'G'];
         const fontSize = 16;
-        const columns = canvas.width / fontSize;
-
-        // Array to store the y-position of each column's drop
+        let columns = bgCanvas.width / fontSize;
         const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
+        for (let x = 0; x < columns; x++) drops[x] = 1;
 
-        function draw() {
-            // Set a semi-transparent background to create the fading trail effect
+        function drawBackground() {
             ctx.fillStyle = 'rgba(10, 25, 47, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Set color and font for the characters
-            ctx.fillStyle = '#64ffda'; // Accent color
+            ctx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+            ctx.fillStyle = '#64ffda';
             ctx.font = fontSize + 'px monospace';
-
-            // Loop through each column
             for (let i = 0; i < drops.length; i++) {
-                // Get a random character from the chars array
                 const text = chars[Math.floor(Math.random() * chars.length)];
-                
-                // Draw the character
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                // Reset drop to the top randomly after it has crossed the screen
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-
-                // Increment y-position for the next frame
+                if (drops[i] * fontSize > bgCanvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
+        setInterval(drawBackground, 50);
 
-        // Animation loop
-        setInterval(draw, 50);
-
-        // Handle window resize
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            // Recalculate columns and reset drops on resize
-            const newColumns = canvas.width / fontSize;
-            drops.length = 0; // Clear existing drops
-            for (let x = 0; x < newColumns; x++) {
-                drops[x] = 1;
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            columns = bgCanvas.width / fontSize;
+            drops.length = 0;
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+        });
+
+        // --- Gemini API and Modal Logic ---
+        const modal = document.getElementById('skill-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalTitle = document.getElementById('modal-skill-title');
+        const modalExplanation = document.getElementById('modal-skill-explanation');
+        const loaderHTML = '<div class="flex justify-center items-center h-24"><div class="loader"></div></div>';
+
+        skillsContainer.addEventListener('click', async (e) => {
+            const target = e.target.closest('.skill-explainer-btn');
+            if (target) {
+                const skill = target.parentElement.dataset.skill;
+                openModal(skill);
+                await getSkillExplanation(skill);
             }
         });
+
+        function openModal(skill) {
+            modalTitle.textContent = skill;
+            modalExplanation.innerHTML = loaderHTML;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        async function getSkillExplanation(skill) {
+            const prompt = `Explain the technical skill "${skill}" in the context of bioinformatics. Keep it concise (2-3 sentences) and easy for a non-technical audience, like a recruiter, to understand.`;
+            
+            try {
+                const responseText = await callGeminiApi(prompt);
+                modalExplanation.textContent = responseText;
+            } catch (error) {
+                console.error("Error fetching skill explanation:", error);
+                modalExplanation.textContent = "Sorry, I couldn't fetch an explanation right now. Please try again later.";
+            }
+        }
+
+        async function callGeminiApi(prompt) {
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // API key is handled by the environment.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            let response;
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else {
+                           throw new Error("Invalid response structure from API");
+                        }
+                    } else if (response.status === 429 || response.status >= 500) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    } else {
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                } catch (error) {
+                    if (i === 4) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+            throw new Error("API request failed after multiple retries.");
+        }
+
     </script>
 </body>
 </html>
