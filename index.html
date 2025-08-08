@@ -89,36 +89,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Skill explainer button */
-        .skill-explainer-btn {
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .skill-explainer-btn:hover {
-            color: #64ffda;
-        }
-        /* Modal styles */
-        .modal-overlay {
-            background-color: rgba(10, 25, 47, 0.5);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-             background-color: #112240;
-             border: 1px solid #1e2d4a;
-        }
-        /* Spinner for loading state */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #64ffda;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         .clickable-card {
             display: block;
             text-decoration: none;
@@ -330,19 +300,6 @@
         <p>&copy; 2025 Rakesh Kumar A. All rights reserved.</p>
         <p class="mt-1">Designed & Built by Rakesh Kumar A</p>
     </footer>
-
-    <!-- AI Skill Explainer Modal -->
-    <div id="skill-modal" class="fixed inset-0 z-50 modal-overlay items-center justify-center hidden">
-        <div class="modal-content w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg p-6 relative">
-            <button id="close-modal-btn" class="absolute top-3 right-3 text-2xl text-[#8892b0] hover:text-white">&times;</button>
-            <h3 id="modal-skill-title" class="text-2xl font-bold text-white mb-4"></h3>
-            <div id="modal-skill-explanation" class="text-[#ccd6f6]">
-                <div class="flex justify-center items-center h-24">
-                    <div class="loader"></div>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <script>
         // --- Static Data and Initial Setup ---
@@ -360,14 +317,6 @@
             const skillText = document.createElement('span');
             skillText.textContent = skill;
             skillElement.appendChild(skillText);
-
-            // The clickable element now has the class and the data attribute
-            const explainerBtn = document.createElement('span');
-            explainerBtn.className = 'skill-explainer-btn';
-            explainerBtn.innerHTML = '<i class="fas fa-info-circle ml-3"></i>';
-            explainerBtn.title = `✨ Explain with AI`;
-            explainerBtn.dataset.skill = skill;
-            skillElement.appendChild(explainerBtn);
 
             skillsContainer.appendChild(skillElement);
         });
@@ -450,93 +399,6 @@
             drops.length = 0;
             for (let x = 0; x < columns; x++) drops[x] = 1;
         });
-
-        // --- Gemini API and Modal Logic (FIXED) ---
-        const modal = document.getElementById('skill-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalTitle = document.getElementById('modal-skill-title');
-        const modalExplanation = document.getElementById('modal-skill-explanation');
-        const loaderHTML = '<div class="flex justify-center items-center h-24"><div class="loader"></div></div>';
-
-        skillsContainer.addEventListener('click', async (e) => {
-            // Correctly identify the clickable target (the span)
-            const target = e.target.closest('.skill-explainer-btn');
-            if (target) {
-                // Get the skill from the target's dataset
-                const skill = target.dataset.skill;
-                openModal(skill);
-                await getSkillExplanation(skill);
-            }
-        });
-
-        function openModal(skill) {
-            modalTitle.textContent = skill;
-            modalExplanation.innerHTML = loaderHTML;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        async function getSkillExplanation(skill) {
-            const prompt = `Explain the technical skill "${skill}" in the context of bioinformatics. Keep it concise (2-3 sentences) and easy for a non-technical audience, like a recruiter, to understand.`;
-            
-            try {
-                const responseText = await callGeminiApi(prompt);
-                modalExplanation.textContent = responseText;
-            } catch (error) {
-                console.error("Error fetching skill explanation:", error);
-                modalExplanation.textContent = "Sorry, I couldn't fetch an explanation right now. Please try again later.";
-            }
-        }
-
-        async function callGeminiApi(prompt) {
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // API key is handled by the environment.
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            
-            let response;
-            let delay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.ok) {
-                        const result = await response.json();
-                        if (result.candidates && result.candidates[0]?.content?.parts?.[0]?.text) {
-                            return result.candidates[0].content.parts[0].text;
-                        } else {
-                           throw new Error("Invalid response structure from API");
-                        }
-                    } else if (response.status === 429 || response.status >= 500) {
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        delay *= 2;
-                    } else {
-                        throw new Error(`API request failed with status ${response.status}`);
-                    }
-                } catch (error) {
-                    if (i === 4) {
-                        throw error;
-                    }
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2;
-                }
-            }
-            throw new Error("API request failed after multiple retries.");
-        }
 
     </script>
 </body>
