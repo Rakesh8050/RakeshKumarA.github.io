@@ -8,11 +8,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body{font-family:'Inter',sans-serif;background-color:#0a192f;color:#ccd6f6}#particles-js{position:fixed;width:100%;height:100%;top:0;left:0;z-index:-1}.section-card{background-color:rgba(10,25,47,0.85);backdrop-filter:blur(10px);border:1px solid #1e2d4a;transition:transform .3s ease,box-shadow .3s ease}.section-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px -15px rgba(2,12,27,.7)}.nav-link{position:relative;color:#ccd6f6;transition:color .3s}.nav-link::after{content:'';position:absolute;width:0;height:2px;bottom:-4px;left:50%;transform:translateX(-50%);background-color:#64ffda;transition:width .3s}.nav-link:hover,.nav-link.active{color:#64ffda}.nav-link.active::after{width:100%}.fade-in-section{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}.fade-in-visible{opacity:1;transform:translateY(0)}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        #bg-canvas {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .section-card {
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid #1e2d4a;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, .7);
+        }
+        .nav-link {
+            position: relative;
+            color: #ccd6f6;
+            transition: color .3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #64ffda;
+            transition: width .3s;
+        }
+        .nav-link:hover,
+        .nav-link.active {
+            color: #64ffda;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s ease-out, transform .6s ease-out;
+        }
+        .fade-in-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tech-tag {
+            background-color: #1e2d4a;
+            color: #64ffda;
+        }
     </style>
 </head>
 <body class="antialiased">
-    <div id="particles-js"></div>
+    <canvas id="bg-canvas"></canvas>
     <header class="bg-gray-900/50 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-white">Rakesh Kumar A.</a>
@@ -34,32 +92,115 @@
     <main class="container mx-auto px-6 py-8 pt-24 z-10 relative">
         <section id="internships" class="py-20">
             <h2 class="text-4xl font-bold text-center text-white mb-12">Internship Experience</h2>
-            <div class="max-w-4xl mx-auto space-y-8">
-                <!-- Internship 1 -->
+            <div class="max-w-4xl mx-auto space-y-12">
+                <!-- Internship 1: Shodhaka -->
                 <div class="section-card p-8 rounded-lg fade-in-section">
-                    <h3 class="text-2xl font-bold text-white">Regulatory Genomics Intern</h3>
-                    <p class="text-md text-[#64ffda] mb-2">Shodhaka Life Sciences Pvt. Ltd. (Dec 2024 - Jun 2025)</p>
-                    <p class="text-lg text-[#ccd6f6]">
-                        Evaluated transcription factor binding site (TFBS) resources using MEME Suite, RSAT, and BioMart. Developed standardized workflows for promoter sequence analysis, enhancing reproducibility in regulatory genomics studies.
-                    </p>
+                    <h3 class="text-2xl font-bold text-white">Bioinformatics Intern</h3>
+                    <p class="text-md text-[#64ffda] mb-4">Shodhaka Life Sciences Pvt. Ltd. (Dec 2024 - Jun 2025)</p>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-white mb-3">Key Responsibilities:</h4>
+                        <ul class="list-disc list-inside text-[#ccd6f6] space-y-2">
+                            <li>Systematically compiled and compared web-based Transcription Factor Binding Site (TFBS) resources to evaluate their utility in genomic studies.</li>
+                            <li>Analyzed promoter sequences from large gene sets to identify over-represented TFBSs and potential regulatory elements.</li>
+                            <li>Performed motif enrichment analysis and motif scanning to predict TFBSs and their impact on gene expression.</li>
+                            <li>Cross-validated computational predictions with experimental data (e.g., ChIP-Seq) to ensure biological relevance.</li>
+                            <li>Contributed to the development of a standardized tabular format for TFBS analysis outputs to improve reproducibility.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-white mb-3">Tools & Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">R</span>
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">MEME Suite</span>
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">RSAT</span>
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">BioMart</span>
+                            <span class="tech-tag px-3 py-1 rounded-full text-sm">UCSC Genome Browser</span>
+                        </div>
+                    </div>
                 </div>
-                <!-- Internship 2 -->
+
+                <!-- Internship 2: Biokart -->
                 <div class="section-card p-8 rounded-lg fade-in-section" style="transition-delay: 100ms;">
                     <h3 class="text-2xl font-bold text-white">Bioinformatics Intern</h3>
-                    <p class="text-md text-[#64ffda] mb-2">Biokart India Pvt. Ltd. (Sep 2024 - Nov 2024)</p>
-                    <p class="text-lg text-[#ccd6f6]">
-                        Gained hands-on experience in Next-Generation Sequencing (NGS) workflows, focusing on quality control (FastQC) and sequence trimming (TrimGalore) for WGS and WMS data. Contributed to report generation and utilized tools like Trinity, SAMtools, and Velvet.
-                    </p>
+                    <p class="text-md text-[#64ffda] mb-4">Biokart India Pvt. Ltd. (Sep 2024 - Nov 2024)</p>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-white mb-3">Key Responsibilities:</h4>
+                        <ul class="list-disc list-inside text-[#ccd6f6] space-y-2">
+                            <li>Conducted quality control on raw FASTQ files from Whole-Genome (WGS) and Whole-Metagenome (WMS) sequencing projects.</li>
+                            <li>Performed data cleaning and pre-processing, including adapter trimming and removal of low-quality bases.</li>
+                            <li>Executed de novo genome and transcriptome assembly pipelines using short-read sequencing data.</li>
+                            <li>Managed and processed alignment files (SAM/BAM), including sorting, indexing, and subset extraction.</li>
+                            <li>Contributed to the final analysis and report generation for various sequencing projects.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-white mb-3">Tools & Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">FastQC</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">TrimGalore</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">Trimmomatic</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">Velvet</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">Trinity</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">SAMtools</span>
+                             <span class="tech-tag px-3 py-1 rounded-full text-sm">Minimap2</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer class="py-6 text-center text-sm text-[#8892b0]"><p>&copy; 2025 Rakesh Kumar A. All rights reserved.</p></footer>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <footer class="py-6 text-center text-sm text-[#8892b0]">
+        <p>&copy; 2025 Rakesh Kumar A. All rights reserved.</p>
+    </footer>
     <script>
-        document.getElementById('mobile-menu-button').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('hidden'));
-        particlesJS('particles-js',{"particles":{"number":{"value":160,"density":{"enable":!0,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle"},"opacity":{"value":1,"random":!0,"anim":{"enable":!0,"speed":1,"opacity_min":0,"sync":!1}},"size":{"value":3,"random":!0},"line_linked":{"enable":!1},"move":{"enable":!0,"speed":1,"direction":"bottom","random":!0,"straight":!1,"out_mode":"out","bounce":!1}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":!1},"onclick":{"enable":!1},"resize":!0}},"retina_detect":!0});
-        const observer=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add('fade-in-visible')})},{threshold:.1});document.querySelectorAll('.fade-in-section').forEach(e=>observer.observe(e));
+        document.getElementById('mobile-menu-button').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
+        
+        // --- Genomic Data Stream Background ---
+        const bgCanvas = document.getElementById('bg-canvas');
+        const ctx = bgCanvas.getContext('2d');
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+        const chars = ['A', 'T', 'C', 'G'];
+        const fontSize = 16;
+        let columns = bgCanvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function drawBackground() {
+            ctx.fillStyle = 'rgba(10, 25, 47, 0.1)';
+            ctx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+            ctx.fillStyle = '#64ffda';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > bgCanvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawBackground, 50);
+
+        window.addEventListener('resize', () => {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            columns = bgCanvas.width / fontSize;
+            drops.length = 0;
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+        });
+
+        const observer = new IntersectionObserver(e => {
+            e.forEach(e => {
+                e.isIntersecting && e.target.classList.add('fade-in-visible')
+            })
+        }, {
+            threshold: .1
+        });
+        document.querySelectorAll('.fade-in-section').forEach(e => observer.observe(e));
     </script>
 </body>
 </html>
